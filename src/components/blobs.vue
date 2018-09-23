@@ -112,7 +112,7 @@ export default {
                 height: 1.2rem /* 90/75 */;
                 display: flex;
                 justify-content: center;
-                // filter: url(#goo);
+                filter: url(#goo);
                 color: #fff;
                 .circle {
                     position: absolute;
