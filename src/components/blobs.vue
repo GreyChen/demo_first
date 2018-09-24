@@ -26,7 +26,7 @@
                     <div>购物车</div>
                 </div>
                 <div class="my tab">
-                    <i class="iconfont icon-wode"></i>
+                    <i class="iconfont icon-wode1"></i>
                     <div>我的</div>
                 </div>
             </div>
@@ -112,7 +112,7 @@ export default {
                 height: 1.2rem /* 90/75 */;
                 display: flex;
                 justify-content: center;
-                filter: url(#goo);
+                filter: url(#goo);  
                 color: #fff;
                 .circle {
                     position: absolute;
