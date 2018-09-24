@@ -3,7 +3,7 @@
         <div class="main" ref="main">
             <div class="iconfont icon-ai-top" :class="{'top-show': mainScrollTop > 350}" @click="$refs.main.scrollTop = 0"></div>
             <ul>
-                <li v-for="item in 50">这是一个demo</li>
+                <li v-for="(item, index) in 50" :key="index">这是第{{index + 1}}行</li>
             </ul>
         </div>
         <div class="footer">
@@ -86,17 +86,17 @@ export default {
             .icon-ai-top {
                 position: fixed;
                 right: .266667rem /* 20/75 */;
-                top: 75%;
+                top: 80%;
                 border-radius: 50%;
                 background: #58bc58;
                 color: #fff;
-                width: .666667rem /* 50/75 */;
-                height: .666667rem /* 50/75 */;
-                font-size: .346667rem /* 26/75 */;
-                line-height: .666667rem /* 50/75 */;
-                transform: translateX(1.066667rem /* 80/75 */);
+                width: .933333rem /* 70/75 */;
+                height: .933333rem /* 70/75 */;
+                font-size: .48rem /* 36/75 */;
+                line-height: .933333rem /* 70/75 */;
+                transform: translateX(1.333333rem /* 100/75 */);
                 opacity: 0;
-                transition: all 1s;
+                transition: all 1s; 
             }
             .top-show {
                 transform: translateX(0);
@@ -108,6 +108,7 @@ export default {
             display: flex;
             justify-content: space-between;
             padding: 0 .4rem;
+            padding-top: .4rem;
             position: relative;
             .tableft {
                 display: flex;
@@ -137,7 +138,7 @@ export default {
             }
             .blobs {   
                 position: absolute;
-                top: -1.546667rem /* 116/75 */;
+                top: -1.2rem /* 90/75 */;
                 left: 50%;
                 transform: translateX(-50%);
                 width: 100%;
@@ -159,6 +160,8 @@ export default {
                     p {
                         transition: transform 0.5s linear;
                         font-size: .666667rem /* 50/75 */;
+                      
+
                     }
                 }
                 
