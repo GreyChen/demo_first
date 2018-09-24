@@ -1,7 +1,10 @@
 <template>
     <div id="blobs" >
-        <div class="main">
-
+        <div class="main" ref="main">
+            <div class="iconfont icon-ai-top" :class="{'top-show': mainScrollTop > 350}" @click="$refs.main.scrollTop = 0"></div>
+            <ul>
+                <li v-for="item in 50">这是一个demo</li>
+            </ul>
         </div>
         <div class="footer">
             <div class="tableft">
@@ -49,13 +52,21 @@ export default {
     data() {
         return {
             isShow: false,
+            mainScrollTop: '',
         }
     },
     methods: {
         openBlobs() {
             this.isShow = !this.isShow
-        }
+        },
+        
     },
+    mounted() {
+        this.$refs.main.addEventListener('scroll', () => {
+            this.mainScrollTop = this.$refs.main.scrollTop
+            // console.log(this.mainScrollTop)
+        })
+    }
    
 }
 </script>
@@ -71,6 +82,27 @@ export default {
         line-height: 1.2rem;
         .main {
             flex:1;
+            overflow-x: hidden;
+            .icon-ai-top {
+                position: fixed;
+                right: .266667rem /* 20/75 */;
+                top: 75%;
+                border-radius: 50%;
+                background: #58bc58;
+                color: #fff;
+                width: .666667rem /* 50/75 */;
+                height: .666667rem /* 50/75 */;
+                font-size: .346667rem /* 26/75 */;
+                line-height: .666667rem /* 50/75 */;
+                transform: translateX(1.066667rem /* 80/75 */);
+                opacity: 0;
+                transition: all 1s;
+            }
+            .top-show {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            
         }
         .footer{
             display: flex;

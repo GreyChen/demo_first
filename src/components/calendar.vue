@@ -115,7 +115,7 @@ export default {
             this.currentMonth();
             if(this.todayMonth !== this.month || this.todayYear !== this.year)  this.currentIdx = '';
             if(this.todayMonth == this.month && this.todayYear == this.year) this.getCurrentIdx();  
-            console.log(this.todayYear) 
+            
         },
         //上个月
         prevMonth() {
