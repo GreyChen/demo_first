@@ -2,9 +2,22 @@
     <div id="blobs" >
         <div class="main" ref="main">
             <div class="iconfont icon-ai-top" :class="{'top-show': mainScrollTop > 350}" @click="$refs.main.scrollTop = 0"></div>
-            <ul>
-                <li v-for="(item, index) in 50" :key="index">这是第{{index + 1}}行</li>
-            </ul>
+            <div class="goodslist">
+                <!-- <ul>
+                    <li v-for="(item, index) in goodsList" :key="index">
+                        {{item.title}}
+                    </li>
+                </ul> -->
+                <slide-delete-ul>
+                    <slide-delete-li  v-for="(item, index) in goodsList" :key="index">
+                        <div class="goods">
+                            <img src="../assets/logo.png" alt="">
+                            <p>{{item.title}}</p>
+                        </div>
+                    </slide-delete-li>
+                </slide-delete-ul>
+
+            </div>
         </div>
         <div class="footer">
             <div class="tableft">
@@ -48,17 +61,28 @@
 
 </template>
 <script>
+import axios from 'axios'
+import slideDeleteUl from './plugin/slide-delete-ul'
+import slideDeleteLi from './plugin/slide-delete-li'
 export default {
     data() {
         return {
             isShow: false,
             mainScrollTop: '',
+            goodsList: []
         }
     },
     methods: {
         openBlobs() {
             this.isShow = !this.isShow
         },
+        deleteGoods(item) {
+            let pId = item.pID
+            // console.log(pId)
+            /* axios.get('http://127.0.0.1:1300/deleteGoods', {params:{id: pId}}).then(res => {
+                console.log(res)
+            }) */
+        }
         
     },
     mounted() {
@@ -66,6 +90,15 @@ export default {
             this.mainScrollTop = this.$refs.main.scrollTop
             // console.log(this.mainScrollTop)
         })
+        axios.get('http://127.0.0.1:1300/IndexProducts').then(res => {
+            this.goodsList = res.data.data.results
+            console.log(this.goodsList)
+        })
+    },
+    components: {
+        slideDeleteLi,
+        slideDeleteUl,
+
     }
    
 }
@@ -83,6 +116,23 @@ export default {
         .main {
             flex:1;
             overflow-x: hidden;
+            padding: 0 .4rem;
+            .goodslist {
+                ul {
+                    li {
+                        border-bottom: 1px solid #e5e5e5;
+                    }
+                }
+                .goods {
+                    display: flex;
+                    img {
+                        width: .8rem /* 60/75 */;
+                        height: .8rem;
+                        align-self: center;
+                        margin-right: .266667rem /* 20/75 */;
+                    }
+                }
+            }
             .icon-ai-top {
                 position: fixed;
                 right: .266667rem /* 20/75 */;

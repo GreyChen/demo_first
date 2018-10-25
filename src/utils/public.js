@@ -1,7 +1,6 @@
 // import $http from './http'
 import $router from '../router'
 
-// console.log($router)
 
 // 公用函数区域
 export default {
@@ -44,16 +43,48 @@ export default {
         document.cookie = name + "=" + ";expires=" + expires.toUTCString() + path;
     },
 
-    // 存值到localstorage中
-    addLocalStorage(key, value) {
-        let obj = localStorage.getItem(key);
-        if (obj) {
-            localStorage.removeItem(key);
-            localStorage.setItem(key, JSON.stringify(value));
-        } else {
-            localStorage.setItem(key, JSON.stringify(value));
+
+    
+
+    // 取出 cookie Token
+    getTokenCookie(name) {
+
+        var name = escape(name);
+        var allcookies = document.cookie;
+        name += "=";
+        var pos = allcookies.indexOf(name);
+        //如果找到了具有该名字的cookie，那么提取并使用它的值
+        if (pos != -1) {
+            var start = pos + name.length;
+            var end = allcookies.indexOf(";", start);
+            if (end == -1)
+                end = allcookies.length;
+            var value = allcookies.substring(start, end);
+            // console.log('有cookie')
+            return (unescape(value));
+        }else { //搜索失败，返回空字符串
+            // console.log('无cookie')
+
+            window.$Mint2.MessageBox.confirm('',{
+
+                message: '登录已过期是否重新登录',
+                title: '提示',
+                confirmButtonText: '确定', 
+                cancelButtonText: '取消' ,
+                closeOnClickModal: false,
+                }).then(res => {
+                    if(res == 'confirm') {
+                        $router.push('login');
+                    }
+                }).catch(err => {
+                    if(err == 'cancel') {
+                }
+            });
+            return ''
         }
     },
+
+
 
     //封装token过期控制代码
     /* 
@@ -79,11 +110,11 @@ export default {
         var data = localStorage.getItem(key);
         var dataObj = JSON.parse(data);
 
-        if(dataObj){ //有tokend的情况下
+        if(dataObj){ //有token的情况下
 
             if (new Date().getTime() / 1000 - dataObj.time > exp) {
-
-                $Messagebox.confirm('',{
+                
+                window.$Mint2.MessageBox.confirm('',{
                     message: '登录已过期是否重新登录',
                     title: '提示',
                     confirmButtonText: '确定', 
@@ -114,6 +145,17 @@ export default {
 
 
 
+
+    // 存值到localstorage中
+    addLocalStorage(key, value) {
+        let obj = localStorage.getItem(key);
+        if (obj) {
+            localStorage.removeItem(key);
+            localStorage.setItem(key, JSON.stringify(value));
+        } else {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+    },
 
 
     // 取值localstorage
@@ -156,8 +198,16 @@ export default {
     },
 
     // 取sessionstorage值
-    getSessionStorage(key) {
-        return JSON.parse(sessionStorage.getItem(key));
+    getSessionStorage(key,cb) {
+        if(key == 'userInfo'&& cb){
+            $http.get('nowLoginInfo').then(res=>{
+                if(res.data.state){
+                    cb(res.data.sub_user)
+                }
+            });
+        }else{
+            return JSON.parse(sessionStorage.getItem(key));
+        }
     },
 
     // 删除sessionStorage中的值
