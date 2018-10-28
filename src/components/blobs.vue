@@ -90,9 +90,13 @@ export default {
             this.mainScrollTop = this.$refs.main.scrollTop
             // console.log(this.mainScrollTop)
         })
+        //https://www.apiopen.top/satinApi?type=1&page=1
+        //http://127.0.0.1:1300/IndexProducts
         axios.get('http://127.0.0.1:1300/IndexProducts').then(res => {
             this.goodsList = res.data.data.results
-            console.log(this.goodsList)
+            // this.goodsList = res.data.data
+            console.log(res)
+            // console.log(this.goodsList)
         })
     },
     components: {
