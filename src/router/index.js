@@ -10,7 +10,7 @@ Vue.use(Router)
 
 let router =  new Router({
   routes: [
-    
+    { path: '/',redirect:'/blobs'},
     { path: '/blobs', name: 'blobs', component: blobs }, //果冻菜单
     { path: '/calendar', name: 'calendar', component: calendar } //日历
 

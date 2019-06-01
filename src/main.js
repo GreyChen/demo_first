@@ -4,12 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 // import './assets/rem.js'
-import $public from './utils/public'
+// import $public from './utils/public'
 // import { Confirm } from 'vux'
 
 Vue.config.productionTip = false
+import './api/api'
 
-Vue.prototype.$public = $public
+// Vue.prototype.$public = $public
 // Vue.component('confirm', Confirm)
 /* eslint-disable no-new */ 
 new Vue({

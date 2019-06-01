@@ -92,12 +92,7 @@ export default {
         })
         //https://www.apiopen.top/satinApi?type=1&page=1
         //http://127.0.0.1:1300/IndexProducts
-        axios.get('http://127.0.0.1:1300/IndexProducts').then(res => {
-            this.goodsList = res.data.data.results
-            // this.goodsList = res.data.data
-            console.log(res)
-            // console.log(this.goodsList)
-        })
+       
     },
     components: {
         slideDeleteLi,
