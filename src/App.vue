@@ -30,7 +30,7 @@ export default {
                 alert('ios')
             } */
 
-    var str = 'str3'
+    var str = 'str4'
   }
 }
 </script>
