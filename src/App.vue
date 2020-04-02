@@ -29,6 +29,8 @@ export default {
         　　　　//这个是ios操作系统
                 alert('ios')
             } */
+
+    var str = 'str1'
   }
 }
 </script>
